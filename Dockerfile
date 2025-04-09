@@ -1,32 +1,33 @@
-# FROM python:3.9
-
-# WORKDIR /app/backend
-
-# COPY requirements.txt /app/backend
-# RUN apt-get update \
-#     && apt-get upgrade -y \
-#     && apt-get install -y gcc default-libmysqlclient-dev pkg-config \
-#     && rm -rf /var/lib/apt/lists/*
-
-
-# # Install app dependencies
-# RUN pip install mysqlclient
-# RUN pip install --no-cache-dir -r requirements.txt
-
-# COPY . /app/backend
-
-# EXPOSE 8000
-# #RUN python manage.py migrate
-# #RUN python manage.py makemigrations
 FROM python:3.9
 
-WORKDIR /app
-COPY . /app
+WORKDIR /app/backend
+
+COPY requirements.txt /app/backend
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y gcc default-libmysqlclient-dev pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# Install app dependencies
 RUN pip install mysqlclient
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose Django default port
+COPY . /app/backend
+
 EXPOSE 8000
+#RUN python manage.py migrate
+#RUN python manage.py makemigrations
+##################
+# FROM python:3.9
 
-# Add this line to start the Django server when container runs
+# WORKDIR /app
+# COPY . /app
+# RUN pip install mysqlclient
+# RUN pip install -r requirements.txt
+
+# # Expose Django default port
+# EXPOSE 8000
+
+# # Add this line to start the Django server when container runs
 CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]

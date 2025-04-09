@@ -22,6 +22,7 @@ FROM python:3.9
 
 WORKDIR /app
 COPY . /app
+RUN pip install mysqlclient
 RUN pip install -r requirements.txt
 
 # Expose Django default port

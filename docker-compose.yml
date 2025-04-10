@@ -41,11 +41,12 @@ services:
     volumes:
       - ./data/mysql/db:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot", "--silent"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 60s
+
     networks:
       - notes-app-nw
     restart: always

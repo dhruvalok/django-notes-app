@@ -18,16 +18,5 @@ COPY . /app/backend
 EXPOSE 8000
 #RUN python manage.py migrate
 #RUN python manage.py makemigrations
-##################
-# FROM python:3.9
-
-# WORKDIR /app
-# COPY . /app
-# RUN pip install mysqlclient
-# RUN pip install -r requirements.txt
-
-# # Expose Django default port
-# EXPOSE 8000
-
 # # Add this line to start the Django server when container runs
 CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
